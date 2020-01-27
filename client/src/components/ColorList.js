@@ -16,7 +16,7 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
-  const saveEdit = (e, colorToEdit) => {
+  const saveEdit = (e) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
@@ -24,7 +24,9 @@ const ColorList = ({ colors, updateColors }) => {
     api().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res=>{
         console.log('save edit: ', res.data)
-        // updateColors(colorToEdit)
+        const updatedColorArr = colors.filter(item => item.id !== colorToEdit.id)
+        updateColors([...updatedColorArr, colorToEdit])
+        setEditing(false)
       })
       .catch(err=>{
         console.log(err)
@@ -67,7 +69,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={()=>saveEdit(colorToEdit)}>
+        <form onSubmit={saveEdit}>
           <legend>edit color</legend>
           <label>
             color name:
