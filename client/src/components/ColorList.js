@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from '../utls/api';
+import AddForm from './AddForm';
 
 const initialColor = {
   color: "",
@@ -48,6 +49,7 @@ const ColorList = ({ colors, updateColors }) => {
   return (
     <div className="colors-wrap">
       <p>colors</p>
+      <AddForm colors={colors} updateColors={updateColors}/>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
