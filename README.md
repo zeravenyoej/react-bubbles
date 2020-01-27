@@ -1,4 +1,5 @@
-pull request: 
+pull request: https://github.com/zeravenyoej/react-bubbles/pull/1
+
 # Sprint Challenge: Advanced Web Applications - React Bubbles
 
 This challenge allows you to practice the concepts and techniques learned over the past Sprint and apply them in a concrete project. This Sprint explored Advanced Web Applications, focusing on testing, client-side authentication, hosting web apps, and PUT and DELETE requests.
@@ -30,9 +31,20 @@ In this project you will create a login page and request a token from the server
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain what a token is used for.
+  
+A token is issued by a server to a client as evidence that the client has provided correct login credentials. 
+
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+You can create a custom PrivateRoute that, should a user without an authentication token try to access a component, will be redirected to another. This way the route/component is only accessible once a token has been issued.
+
 - [ ] Describe how web servers work.
+
+Computers connect to the internet via the world wide web, locate a specific server computer through a URL and domain name, and get info from that server.
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+CRUD stands for create, read, update, delete. In terms of HTTP methods, we have used create, delete, put (same as update), and get (comparable to read).
 
 
 ## Project Set Up
