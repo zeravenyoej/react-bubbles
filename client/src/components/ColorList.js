@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from '../utls/api';
+import AddForm from './AddForm';
 
 const initialColor = {
   color: "",
@@ -16,20 +17,39 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
-  const saveEdit = e => {
+  const saveEdit = (e) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    api().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res=>{
+        console.log('save edit: ', res.data)
+        const updatedColorArr = colors.filter(item => item.id !== colorToEdit.id)
+        updateColors([...updatedColorArr, colorToEdit])
+        setEditing(false)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    api().delete(`/api/colors/${color.id}`)
+    .then(res=>{
+      console.log('deleted: ', res.data)
+      updateColors(colors.filter(item => item.id !== color.id ))
+    })
+    .catch(err=>{
+      console.log('from delete: ', err)
+    })
   };
 
   return (
     <div className="colors-wrap">
       <p>colors</p>
+      <AddForm colors={colors} updateColors={updateColors}/>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
